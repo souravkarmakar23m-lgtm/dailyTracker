@@ -1,3 +1,7 @@
+*{
+  margin: 0;
+  padding: 0;
+}
 /* Animated Gradient Background */
 .app {
   min-height: 100vh;
@@ -31,24 +35,25 @@
 }
 .container:hover { transform: translateY(-5px); }
 
+/* HEADING – SOLID COLOR PER THEME */
 h1 {
-  text-align: center;
-  color: #333;
+  background: none;
+  -webkit-background-clip: initial;
+  -webkit-text-fill-color: initial;
+  color: var(--accent);
   font-weight: 600;
+  text-align: center;
   margin-bottom: 24px;
   font-size: 28px;
-  background: linear-gradient(90deg, #667eea, #764ba2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
-/* ---------- INPUT BOX (FIXED) ---------- */
+/* INPUT BOX */
 .input-box {
   display: flex;
-  gap: 0;               /* no gap between input & button */
+  gap: 0;
   margin-bottom: 28px;
   border-radius: 12px;
-  overflow: hidden;     /* keep rounded corners together */
+  overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
@@ -64,13 +69,13 @@ h1 {
 
 .input-box input:focus {
   background: #fff;
-  box-shadow: inset 0 0 0 2px #667eea;
+  box-shadow: inset 0 0 0 2px var(--accent);
 }
 
-/* Add button – stays inside the flex row */
+/* Add button */
 .add-btn {
   padding: 0 24px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, var(--accent), #5a4a78);
   color: #fff;
   border: none;
   font-weight: 600;
@@ -83,41 +88,32 @@ h1 {
 }
 .add-btn:active { transform: translateY(0); }
 
-/* ---------- TODO LIST ---------- */
-
-.delete-btn {
-  width: 36px;
-  height: 36px;
-  background: #ff6b6b;
+/* Sort Button */
+.sort-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background: var(--accent);
   color: white;
   border: none;
-  border-radius: 50%;
-  font-size: 20px;
-  font-weight: bold;
+  border-radius: 8px;
+  font-weight: 600;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 6px rgba(255, 107, 107, 0.3);
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
 }
 
-.delete-btn:hover {
-  background: #ff5252;
-  transform: scale(1.1);
-  box-shadow: 0 4px 12px rgba(255, 82, 82, 0.4);
+.sort-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
 }
 
-.delete-btn:active {
-  transform: scale(0.95);
-}
-
+/* TODO LIST */
 .todo-list { list-style: none; padding: 0; margin: 0; }
 
 .todo-item {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   background: #fff;
   padding: 14px 18px;
   margin-bottom: 12px;
@@ -146,6 +142,7 @@ h1 {
   font-size: 16px;
   color: #333;
   transition: color 0.3s;
+  margin-right: 10px;
 }
 .todo-item.completed .todo-text {
   text-decoration: line-through;
@@ -153,18 +150,86 @@ h1 {
   font-style: italic;
 }
 
-.delete-btn {
-  background: #ff6b6b;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-weight: 600;
+/* Priority Select */
+.priority-select {
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #f8f9fa;
+  font-size: 14px;
   cursor: pointer;
+  margin-right: 10px;
+}
+
+.todo-item.priority-high { border-left: 4px solid #ff5252; }
+.todo-item.priority-medium { border-left: 4px solid #ffa726; }
+.todo-item.priority-low { border-left: 4px solid #4caf50; }
+
+/* Move Buttons */
+.move-btn {
+  background: #e0e0e0;
+  color: #333;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-right: 5px;
   transition: all 0.2s ease;
 }
-.delete-btn:hover { background: #ff5252; transform: scale(1.05); }
-.delete-btn:active { transform: scale(0.98); }
+
+.move-btn:hover {
+  background: #d0d0d0;
+}
+
+.move-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Delete Button */
+.delete-btn {
+  width: 36px;
+  height: 36px;
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(255, 107, 107, 0.3);
+}
+
+.delete-btn:hover {
+  background: #ff5252;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(255, 82, 82, 0.4);
+}
+
+.delete-btn:active {
+  transform: scale(0.95);
+}
+
+/* DRAG & DROP STYLES */
+.todo-item {
+  cursor: grab;
+  user-select: none;
+}
+
+.todo-item:active {
+  cursor: grabbing;
+}
+
+.todo-item[draggable="true"]:hover {
+  opacity: 0.9;
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
 
 /* Empty state */
 .empty-state {
@@ -180,3 +245,84 @@ h1 {
   .container { padding: 24px; margin: 10px; }
   h1 { font-size: 24px; }
 }
+
+/* THEME SWITCHER */
+.theme-switcher {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.theme-switcher button {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #ddd;
+  background: white;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.theme-switcher button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.theme-switcher button.active {
+  border-color: #667eea;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.3);
+  transform: scale(1.15);
+}
+
+/* THEME COLORS */
+body.light   { --bg: #f0f4f8; --card: rgba(255,255,255,0.95); --text: #333; --accent: #667eea; }
+body.dark    { --bg: #121212; --card: rgba(30,30,30,0.95);     --text: #eee; --accent: #bb86fc; }
+body.purple  { --bg: #2a1b3d; --card: rgba(70,40,100,0.9);    --text: #e0d0ff; --accent: #9c27b0; }
+body.ocean   { --bg: #0b3d59; --card: rgba(20,60,90,0.9);     --text: #a0e0ff; --accent: #00bcd4; }
+
+.app { background: var(--bg); }
+.container { background: var(--card); color: var(--text); }
+/* ADD & SORT BUTTONS – Always visible on any theme */
+/* ADD BUTTON – Dark Blue (visible on white) */
+.add-btn {
+  background: linear-gradient(135deg, #4a6cd9, #3a5ab8) !important;
+  color: white !important;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.add-btn:hover {
+  background: linear-gradient(135deg, #3a5ab8, #2a4a98) !important;
+  transform: translateY(-2px);
+}
+
+/* SORT BUTTON – Solid Dark Blue (visible on white) */
+.sort-btn {
+  background: #4a6cd9 !important;
+  color: white !important;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 20px;
+  padding: 12px;
+  width: 100%;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.sort-btn:hover {
+  background: #3a5ab8 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+.sort-btn { background: var(--accent); }
+.todo-text { color: var(--text); }
+.todo-item { background: var(--card); }
+.priority-select { background: var(--bg); color: var(--text); border-color: var(--accent); }
+.move-btn { background: var(--bg); color: var(--text); }
