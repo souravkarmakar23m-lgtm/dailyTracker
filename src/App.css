@@ -1,0 +1,182 @@
+/* Animated Gradient Background */
+.app {
+  min-height: 100vh;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Card */
+.container {
+  width: 100%;
+  max-width: 520px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: transform 0.3s ease;
+}
+.container:hover { transform: translateY(-5px); }
+
+h1 {
+  text-align: center;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 24px;
+  font-size: 28px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ---------- INPUT BOX (FIXED) ---------- */
+.input-box {
+  display: flex;
+  gap: 0;               /* no gap between input & button */
+  margin-bottom: 28px;
+  border-radius: 12px;
+  overflow: hidden;     /* keep rounded corners together */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.input-box input {
+  flex: 1;
+  padding: 16px 20px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  background: #f8f9fa;
+  transition: all 0.3s ease;
+}
+
+.input-box input:focus {
+  background: #fff;
+  box-shadow: inset 0 0 0 2px #667eea;
+}
+
+/* Add button – stays inside the flex row */
+.add-btn {
+  padding: 0 24px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+.add-btn:hover {
+  background: linear-gradient(135deg, #5a6fd8, #6a4190);
+  transform: translateY(-2px);
+}
+.add-btn:active { transform: translateY(0); }
+
+/* ---------- TODO LIST ---------- */
+
+.delete-btn {
+  width: 36px;
+  height: 36px;
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(255, 107, 107, 0.3);
+}
+
+.delete-btn:hover {
+  background: #ff5252;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(255, 82, 82, 0.4);
+}
+
+.delete-btn:active {
+  transform: scale(0.95);
+}
+
+.todo-list { list-style: none; padding: 0; margin: 0; }
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  padding: 14px 18px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  animation: slideIn 0.4s ease forwards;
+  opacity: 0;
+  transform: translateX(-20px);
+}
+.todo-item:nth-child(1) { animation-delay: 0.1s; }
+.todo-item:nth-child(2) { animation-delay: 0.2s; }
+.todo-item:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes slideIn {
+  to { opacity: 1; transform: translateX(0); }
+}
+.todo-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.todo-text {
+  flex: 1;
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  transition: color 0.3s;
+}
+.todo-item.completed .todo-text {
+  text-decoration: line-through;
+  color: #999;
+  font-style: italic;
+}
+
+.delete-btn {
+  background: #ff6b6b;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.delete-btn:hover { background: #ff5252; transform: scale(1.05); }
+.delete-btn:active { transform: scale(0.98); }
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  color: #aaa;
+  font-style: italic;
+  margin-top: 20px;
+  font-size: 15px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .container { padding: 24px; margin: 10px; }
+  h1 { font-size: 24px; }
+}
